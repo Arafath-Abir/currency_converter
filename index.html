@@ -1,17 +1,141 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="./output.css" rel="stylesheet" />
-  <title>Tailwind Project</title>
-</head>
-<body>
-  <h1 class="text-3xl font-bold underline text-green-500">
-    Hello Tailwind CSS v4!
-  </h1>
-  <br>
-  <p class="text-green-600 bg-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, eveniet!</p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="./output.css" rel="stylesheet" />
+    <title>Responsive Animated Currency Converter</title>
+    <style>
+      /* Simple bounce animation for button */
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
+      } /* Fade in animation for result */
+      .fade-in {
+        animation: fadeIn 0.5s ease forwards;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center p-6">
+    <div
+      class="w-full max-w-lg bg-white rounded-xl shadow-lg p-10 sm:p-8 md:max-w-2xl lg:max-w-3xl"
+    >
+      <h1
+        class="text-4xl font-extrabold text-[#007BFF] mb-8 text-center animate-pulse"
+      >
+        Currency Converter
+      </h1>
+      <form id="converterForm" class="space-y-8" autocomplete="off">
+        <div>
+          <label for="amount" class="block text-[#343A40] font-semibold mb-3"
+            >Amount</label
+          >
+          <input
+            type="number"
+            id="amount"
+            name="amount"
+            min="0"
+            step="any"
+            placeholder="Enter amount"
+            class="w-full px-5 py-3 border border-gray-300 rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-[#007BFF] transition duration-300"
+            required
+          />
+        </div>
+        <div class="flex flex-col sm:flex-row sm:gap-6">
+          <div class="flex-1 mb-6 sm:mb-0">
+            <label
+              for="fromCurrency"
+              class="block text-[#343A40] font-semibold mb-3"
+              >From</label
+            >
+            <select
+              id="fromCurrency"
+              name="fromCurrency"
+              class="w-full px-4 py-3 border border-gray-300 rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-[#007BFF] transition duration-300"
+              required
+            >
+              <option value="USD">USD - US Dollar</option>
+              <option value="EUR">EUR - Euro</option>
+              <option value="BDT">BDT - Bangladeshi Taka</option>
+              <option value="GBP">GBP - British Pound</option>
+              <option value="JPY">JPY - Japanese Yen</option>
+              <option value="AUD">AUD - Australian Dollar</option>
+              <option value="CAD">CAD - Canadian Dollar</option>
+              <option value="CHF">CHF - Swiss Franc</option>
+              <option value="CNY">CNY - Chinese Yuan</option>
+              <option value="HKD">HKD - Hong Kong Dollar</option>
+              <option value="INR">INR - Indian Rupee</option>
+              <option value="MXN">MXN - Mexican Peso</option>
+              <option value="NZD">NZD - New Zealand Dollar</option>
+              <option value="NOK">NOK - Norwegian Krone</option>
+              <option value="RUB">RUB - Russian Ruble</option>
+              <option value="SAR">SAR - Saudi Riyal</option>
+              <option value="SEK">SEK - Swedish Krona</option>
+              <option value="SGD">SGD - Singapore Dollar</option>
+              <option value="TRY">TRY - Turkish Lira</option>
+              <option value="ZAR">ZAR - South African Rand</option>
+            </select>
+          </div>
+          <div class="flex-1">
+            <label
+              for="toCurrency"
+              class="block text-[#343A40] font-semibold mb-3"
+              >To</label
+            >
+            <select
+              id="toCurrency"
+              name="toCurrency"
+              class="w-full px-4 py-3 border border-gray-300 rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-[#007BFF] transition duration-300"
+              required
+            >
+              <option value="USD">USD - US Dollar</option>
+              <option value="EUR">EUR - Euro</option>
+              <option value="BDT">BDT - Bangladeshi Taka</option>
+              <option value="GBP">GBP - British Pound</option>
+              <option value="JPY">JPY - Japanese Yen</option>
+              <option value="AUD">AUD - Australian Dollar</option>
+              <option value="CAD">CAD - Canadian Dollar</option>
+              <option value="CHF">CHF - Swiss Franc</option>
+              <option value="CNY">CNY - Chinese Yuan</option>
+              <option value="HKD">HKD - Hong Kong Dollar</option>
+              <option value="INR">INR - Indian Rupee</option>
+              <option value="MXN">MXN - Mexican Peso</option>
+              <option value="NZD">NZD - New Zealand Dollar</option>
+              <option value="NOK">NOK - Norwegian Krone</option>
+              <option value="RUB">RUB - Russian Ruble</option>
+              <option value="SAR">SAR - Saudi Riyal</option>
+              <option value="SEK">SEK - Swedish Krona</option>
+              <option value="SGD">SGD - Singapore Dollar</option>
+              <option value="TRY">TRY - Turkish Lira</option>
+              <option value="ZAR">ZAR - South African Rand</option>
+            </select>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="w-full bg-[#28A745] text-white font-extrabold text-lg py-4 rounded-lg hover:bg-green-700 transition duration-300 animate-bounce"
+        >
+          Convert
+        </button>
+      </form>
+      <div
+        id="result"
+        class="mt-8 p-5 bg-[#E9F5EE] border border-[#28A745] rounded-lg text-[#1B4332] font-semibold text-center min-h-[72px] opacity-0"
+      ></div>
+    </div>
+<script src="script.js"></script>
+  </body>
 </html>
- 
